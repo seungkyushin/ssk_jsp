@@ -2,6 +2,7 @@ package com.test.jsp.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,7 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.test.jsp.service.UserService;
 import com.test.jsp.service.UserServiceImpl;
 
@@ -58,23 +61,31 @@ public class UserServlet extends HttpServlet{
 		}else if(cmd.equals("login")){
 			String id = req.getParameter("id");
 			String pwd = req.getParameter("pwd");
-			String str = "";
-			if("test".equals(id)) {
-				if("test".equals(pwd)) {
-					str += "{\"result\":\"ok\",";
-					str += "\"msg\":\"로그인 되셨습니다.\"";
-					str += "}";
-				}else {
-					str += "{\"result\":\"no\",";
-					str += "\"msg\":\"비밀번호 틀림\"";
-					str += "}";
+			HashMap<String,String> hm;
+			
+			try
+			{
+				hm = us.getUser(id, pwd);
+				
+				if(hm.size() == 0 )
+				{
+					hm.put("result", "no");
+					hm.put("msg", "아이디와 비밀번호를 확인하세요");
+					
+				}else
+				{
+					HttpSession hs = req.getSession();
+					hs.setAttribute("user", hm);
+					hm.put("result", "ok");
+					hm.put("msg", hm.get("username") + "님 환영");
+					
 				}
-			}else {
-				str += "{\"result\":\"no\",";
-				str += "\"msg\":\"아이디 틀림\"";
-				str += "}";
+				Gson gs = new Gson();
+				out.println(gs.toJson(hm));
+			}catch(ClassNotFoundException | SQLException e){
+				e.printStackTrace();
 			}
-			out.println(str);
+		
 		}else {
 			res.sendRedirect("/error.jsp");
 		}
