@@ -1,4 +1,4 @@
-package com.test.jsp.servlet;
+ package com.test.jsp.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.test.jsp.dto.UserInfo;
 import com.test.jsp.service.UserService;
 import com.test.jsp.service.UserServiceImpl;
 
@@ -45,6 +46,7 @@ public class UserServlet extends HttpServlet{
 		if(cmd==null) {
 			res.sendRedirect("/error.jsp");
 		}else if(cmd.equals("list")) {
+			System.out.println("cmd : " + cmd.toString());
 			String html="";
 			ArrayList<HashMap<String,String>>
 			userList = us.getUserList();
@@ -59,15 +61,15 @@ public class UserServlet extends HttpServlet{
 			}
 			out.println(html);
 		}else if(cmd.equals("login")){
+			System.out.println("cmd : " + cmd.toString());
 			String id = req.getParameter("id");
 			String pwd = req.getParameter("pwd");
-			HashMap<String,String> hm;
-			
+			HashMap<String,String> hm = new HashMap<String,String>();
 			try
 			{
-				hm = us.getUser(id, pwd);
-				
-				if(hm.size() == 0 )
+				UserInfo ui = us.getUser(id, pwd);
+	
+				if( ui == null )
 				{
 					hm.put("result", "no");
 					hm.put("msg", "아이디와 비밀번호를 확인하세요");
@@ -75,18 +77,27 @@ public class UserServlet extends HttpServlet{
 				}else
 				{
 					HttpSession hs = req.getSession();
-					hs.setAttribute("user", hm);
+					hs.setAttribute("user", ui);
 					hm.put("result", "ok");
-					hm.put("msg", hm.get("username") + "님 환영");
+					hm.put("msg", ui.getUserName() + "님 환영");
 					
 				}
 				Gson gs = new Gson();
 				out.println(gs.toJson(hm));
+				
 			}catch(ClassNotFoundException | SQLException e){
 				e.printStackTrace();
 			}
 		
-		}else {
+		}else if(cmd.equals("logout")){
+			System.out.println("cmd : " + cmd.toString());
+			HttpSession hs = req.getSession();
+			hs.invalidate(); //< 세션의 값을 초기화한다.
+			res.sendRedirect("/user/login.jsp");
+			
+		}else
+		{
+			System.out.println("cmd : " + cmd.toString());
 			res.sendRedirect("/error.jsp");
 		}
 	}

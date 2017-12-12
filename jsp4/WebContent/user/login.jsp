@@ -12,12 +12,13 @@
 <script>
 function callback(re){
 	var obj = JSON.parse(re);
-	alert(obj.result);
 	alert(obj.msg);
+	if(obj.result=="ok"){
+		location.reload();
+	}
+	
 }
 function login(){
-	var params = '{"id":"test","pwd":"r1r2r3"}';
-	params = JSON.parse(params);
 	var url = 'list.user';
 	var id = document.getElementById("id");
 	var pwd = document.getElementById("pwd");
@@ -29,12 +30,10 @@ function login(){
 </script>
 <body>
 <% 
-HashMap<String,String> user = null;
-user = (HashMap<String,String>) session.getAttribute("user");
 if( user != null )
 {
-out.println(user.get("username") + "님 환영합니다.");
-out.println(user.get("username") + "님의 나이는 " + user.get("userage"));
+out.println(user.getUserName() + "님 환영합니다.");
+out.println(user.getUserAge() + "살 이시네요 ");
 }else
 {
 

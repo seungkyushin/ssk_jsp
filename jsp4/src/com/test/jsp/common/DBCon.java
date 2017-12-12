@@ -19,6 +19,7 @@ public class DBCon {
 		String url = "jdbc:mysql://localhost:3306/jsp4";
 		String id = "root";
 		String pwd = "dkagh1234.";
+		
 		Class.forName("org.mariadb.jdbc.Driver");
 		con = DriverManager.getConnection(url,id,pwd);
 		return con;
