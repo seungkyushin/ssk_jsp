@@ -2,6 +2,8 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.test.jsp.common.DBCon;
 import com.test.jsp.dto.UserInfo;
 import com.test.jsp.service.UserService;
 import com.test.jsp.service.UserServiceImpl;
@@ -95,10 +98,32 @@ public class UserServlet extends HttpServlet{
 			hs.invalidate(); //< 세션의 값을 초기화한다.
 			res.sendRedirect("/user/login.jsp");
 			
+		}else if(cmd.equals("join")) {
+			String params = req.getParameter("params");
+			Gson gs = new Gson();
+			HashMap hm = gs.fromJson(params, HashMap.class);
+			int result = us.insertUser(hm);
+		
+			if(result!=0)
+			{
+				hm.put("result","ok");
+				hm.put("msg","회원가입에 성공하셨습니다.");
+				hm.put("url","/user/login.jsp");
+			}
+			else
+			{
+				hm.put("result","no");
+				hm.put("msg","회원가입에 실패하였습니다.");
+			}
+			
+			out.println(gs.toJson(hm));
+			
 		}else
 		{
 			System.out.println("cmd : " + cmd.toString());
 			res.sendRedirect("/error.jsp");
 		}
 	}
+	
+	
 }

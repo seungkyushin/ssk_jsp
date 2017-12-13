@@ -12,6 +12,36 @@ import com.test.jsp.dto.UserInfo;
 
 public class UserServiceImpl implements UserService{
 
+	
+	public int insertUser(HashMap hm)
+	{
+		int result = 0;
+		
+		DBCon dbCon = new DBCon();
+		try {
+			Connection con = dbCon.getConnection();
+			String sql = "INSERT INTO user_info(username, userid, userpwd, userage,useraddress)";
+			       sql += "values(?,?,?,?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1,(String)hm.get("name"));
+			ps.setString(2,(String)hm.get("id"));
+			ps.setString(3,(String)hm.get("pwd"));
+			ps.setString(4,(String)hm.get("age"));
+			ps.setString(5,(String)hm.get("address"));
+			
+			result = ps.executeUpdate();
+		}catch(Exception e)		{
+			e.printStackTrace();
+		}finally{
+			try {
+				dbCon.closeCon();
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+	return result;
+		
+	}
 	public UserInfo getUser(String id, String pwd) throws ClassNotFoundException, SQLException	
 	{
 		DBCon dbCon = new DBCon();
@@ -79,4 +109,5 @@ public class UserServiceImpl implements UserService{
 		}
 		return al;
 	}
+
 }

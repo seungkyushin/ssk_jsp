@@ -23,8 +23,6 @@ ArrayList<HashMap<String,String>> userList = le.getUserList();
 <table border="1">
 	<tr>
 		<th>유저번호</th>
-		<th><%=str1%></th>
-		<th><%=str2%></th>
 		<th>주소</th>
 		<th>아이디</th>
 		<th>비밀번호</th>
