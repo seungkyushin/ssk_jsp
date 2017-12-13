@@ -45,7 +45,7 @@ $("#joinBtn").click(function(){
 		
 		var param = {};
 		param["cmd"] = "join";
-		param["params"] =  JSON.stringify(params);
+		param["params"] = JSON.stringify(params);
 	
 
 		$.ajax({
