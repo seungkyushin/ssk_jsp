@@ -50,19 +50,12 @@ public class UserServlet extends HttpServlet{
 			res.sendRedirect("/error.jsp");
 		}else if(cmd.equals("list")) {
 			System.out.println("cmd : " + cmd.toString());
-			String html="";
-			ArrayList<HashMap<String,String>>
-			userList = us.getUserList();
-			for(HashMap<String,String> map : userList){
-				html += "<tr>";
-				Iterator<String> it = map.keySet().iterator();
-				while(it.hasNext()){
-					String key = it.next();
-					html += "<td>" + map.get(key) + "</td>";
-				}
-				html += "</tr>";
-			}
-			out.println(html);
+			ArrayList<UserInfo>	userList = us.getUserList();
+			Gson gs = new Gson();
+			//< JSP에서 파싱할 수 있도록 스트링으로 변경
+			//<gs.toJson(userList) 하기전에는 객체
+			out.println(gs.toJson(userList));
+			
 		}else if(cmd.equals("login")){
 			System.out.println("cmd : " + cmd.toString());
 			String id = req.getParameter("id");
@@ -101,9 +94,11 @@ public class UserServlet extends HttpServlet{
 		}else if(cmd.equals("join")) {
 			String params = req.getParameter("params");
 			Gson gs = new Gson();
-			HashMap hm = gs.fromJson(params, HashMap.class);
-			int result = us.insertUser(hm);
-		
+			//HashMap hm = gs.fromJson(params, HashMap.class);
+			UserInfo ui = gs.fromJson(params, UserInfo.class);
+			int result = us.insertUser(ui);
+			HashMap<String,String> hm = new HashMap<String,String>();
+			
 			if(result!=0)
 			{
 				hm.put("result","ok");

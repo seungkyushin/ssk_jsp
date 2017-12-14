@@ -37,14 +37,16 @@ function afterLogin(obj){
 $("#joinBtn").click(function(){
 		var url = "join.user";
 		var params = {};
-		params["id"] = $("#id").val();
-		params["pwd"] = $("#pwd").val();
-		params["name"] = $("#name").val();
-		params["age"] = $("#age").val();
-		params["address"] = $("#address").val();
+		//< userID 이값은 DTO의 변수명과 동일하게 해야한다.
+		params["userId"] = $("#id").val();
+		params["userPwd"] = $("#pwd").val();
+		params["userName"] = $("#name").val();
+		params["userAge"] = $("#age").val();
+		params["userAddress"] = $("#address").val();
 		
 		var param = {};
 		param["cmd"] = "join";
+		//< JSON.stringify은 JSON 타입의 문자열로 변경한다.
 		param["params"] = JSON.stringify(params);
 	
 

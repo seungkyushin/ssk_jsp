@@ -42,6 +42,37 @@ public class UserServiceImpl implements UserService{
 	return result;
 		
 	}
+	
+	public int insertUser(UserInfo ui)
+	{
+		int result = 0;
+		
+		DBCon dbCon = new DBCon();
+		try {
+			Connection con = dbCon.getConnection();
+			String sql = "INSERT INTO user_info(username, userid, userpwd, userage,useraddress)";
+			       sql += "values(?,?,?,?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1,ui.getUserName());
+			ps.setString(2,ui.getUserId());
+			ps.setString(3,ui.getUserPwd());
+			ps.setInt(4,ui.getUserAge());
+			ps.setString(5,ui.getUserAddress());
+			
+			result = ps.executeUpdate();
+		}catch(Exception e)		{
+			e.printStackTrace();
+		}finally{
+			try {
+				dbCon.closeCon();
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+	return result;
+		
+	}
+	
 	public UserInfo getUser(String id, String pwd) throws ClassNotFoundException, SQLException	
 	{
 		DBCon dbCon = new DBCon();
@@ -73,9 +104,8 @@ public class UserServiceImpl implements UserService{
 		
 		return ui;
 	}
-	public ArrayList<HashMap<String,String>> getUserList(){
-		ArrayList<HashMap<String,String>> al= 
-				new ArrayList<HashMap<String,String>>();
+	public ArrayList<UserInfo> getUserList(){
+		ArrayList<UserInfo> al= new ArrayList<UserInfo>();
 		DBCon dbCon = new DBCon();
 		try {
 			Connection con = dbCon.getConnection();
@@ -86,17 +116,14 @@ public class UserServiceImpl implements UserService{
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				HashMap<String, String> hm  = new HashMap<String,String>();
-				hm.put("userno", rs.getString("userno"));
-				hm.put("username", rs.getString("username"));
-				hm.put("userid", rs.getString("userid"));
-				hm.put("userpwd", rs.getString("userpwd"));
-				hm.put("userage", rs.getString("userage"));
-				hm.put("dino", rs.getString("dino"));
-				hm.put("useraddress", rs.getString("useraddress"));
-				hm.put("diname", rs.getString("diname"));
-				hm.put("dietc", rs.getString("dietc"));
-				al.add(hm);
+				UserInfo ui  = new UserInfo();
+				ui.setUserNo(rs.getInt("userno"));
+				ui.setUserName(rs.getString("username"));
+				ui.setUserId(rs.getString("userid"));
+				ui.setUserPwd(rs.getString("userpwd"));
+				ui.setUserAge(rs.getInt("userage"));
+				ui.setUserAddress(rs.getString("useraddress"));
+				al.add(ui);
 			}
 		}catch(Exception e) {
 			System.out.println(e);
