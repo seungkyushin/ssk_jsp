@@ -12,11 +12,11 @@
 String rootPath = request.getContextPath();
 UserInfo user = null;
 user = (UserInfo) session.getAttribute("user");
-String m2 = "로그인";
-String u2 = "/user/login.jsp";
+String menu = "login";
+String url = "/user/login.jsp";
 if(user!=null){
-	m2 = "로그아웃";
-	u2 = "/user/logout.user?cmd=logout";
+	menu = "logout";
+	url =  rootPath + "/user/logout.user?cmd=logout";
 }
 %>
 
@@ -32,6 +32,7 @@ $(document).ready(function(){
 	$("table[id='menu'] tr td").click(function(){
 		location.href=this.getAttribute("data-url");
 	})
+	
 })
 </script>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -48,7 +49,7 @@ $(document).ready(function(){
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="<%=rootPath%>/">Home</a></li>
-            <li><a href="<%=rootPath%>/user/login.jsp">login</a></li>
+            <li><a href="<%=rootPath%><%=url%>"><%=menu %></a></li>
             <li><a href="<%=rootPath%>/user/join.jsp">join us</a></li>
             <li><a href="<%=rootPath%>/user/list.jsp">User List</a></li>
           </ul>

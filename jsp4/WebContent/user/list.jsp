@@ -8,7 +8,7 @@ function afterLogin(result){
 	var str="";
  	for(var i=0; i<result.length; i++)
 	{
- 		str += "<tr>";
+ 		str += "<tr data-view='" + result[i].userNo + "'>";
  		for(var j=0; j<ths.length;j++)
  			{
 				var th = ths[j].getAttribute("data-field");
@@ -19,6 +19,9 @@ function afterLogin(result){
 	
  	//< 이너 html과 같은 효과 
 	$("#result_tbody").html(str);
+ 	$("tr[data-view]").click(function(){
+ 		location.href="./view.jsp?userno=" + this.getAttribute("data-view");
+ 	})
 }
 $(document).ready(function(){
 

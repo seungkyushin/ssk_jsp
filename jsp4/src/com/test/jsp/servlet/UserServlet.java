@@ -113,6 +113,40 @@ public class UserServlet extends HttpServlet{
 			
 			out.println(gs.toJson(hm));
 			
+		}else if(cmd.equals("view"))
+		{
+			int userNo =  Integer.parseInt(req.getParameter("userno"));
+			UserInfo ui = us.getUser(userNo);
+			Gson gs = new Gson();
+			out.println(gs.toJson(ui));
+			
+			
+		}
+		else if(cmd.equals("delete"))
+		{
+			String checkPwd = req.getParameter("checkPwd");
+			UserInfo ui = (UserInfo)req.getSession().getAttribute("user");
+			ui.setUserPwd(checkPwd);
+			int result = us.deleteUser(ui);
+			
+			HashMap<String,String> hm = new HashMap<String,String>();
+	
+				if( result == 0 )
+				{
+					hm.put("result", "no");
+					hm.put("msg", "회원 탈퇴에 실패하셨습니다.");
+					
+				}else
+				{
+					hm.put("result", "ok");
+					hm.put("msg", "회원탈퇴에 성공하셨습니다.");
+					hm.put("url", "/user/logout.user?cmd=logout");
+					
+				}
+			Gson gs = new Gson();
+			out.println(gs.toJson(ui));
+			
+			
 		}else
 		{
 			System.out.println("cmd : " + cmd.toString());
