@@ -13,14 +13,17 @@
 <title>리스트 테스트</title>
 </head>
 <body>
-<c:set var="test" value="한글" scope="page"/>
-<c:set var="s_test" value="세션테스트" scope="session"/>
-<c:set var="a_test" value="어플리케이션테스트" scope="application"/>
+
 jstl : ${test}
 <br>
 session : ${s_test}
 <br>
 application : ${a_test}
-<br>
+
+
+<c:forEach var="test" begin="5" end="100" step="5">
+
+${num}, 
+</c:forEach>
 </body>
 </html>

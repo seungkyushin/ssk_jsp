@@ -19,10 +19,10 @@
 		<label for="age" class="sr-only">나이</label> <input type="text"
 			id="age" name="age" class="form-control" placeholder="나이" required >
 		<label for="address" class="sr-only">주소</label> <input type="text"
-			id="address" name="address" class="form-control" placeholder="주소" required >
-						
+			id="address" name="address" class="form-control" placeholder="주소" required ><br>
 			
-
+		<label><input type='radio' id='dino' name='dino' value='apple' checked />개발팀</label>
+		<label><input type='radio' name='dino' value='banana'/>디자인팀</label>
 		
 		<input  class="btn btn-lg btn-primary btn-block"
 			type="button" id="joinBtn" value="회원가입">
@@ -43,7 +43,9 @@ $("#joinBtn").click(function(){
 		params["userName"] = $("#name").val();
 		params["userAge"] = $("#age").val();
 		params["userAddress"] = $("#address").val();
-		
+		params["diNo"] = $("#dino").val();
+		alert($("#dino").val());
+		return;
 		var param = {};
 		param["cmd"] = "join";
 		//< JSON.stringify은 JSON 타입의 문자열로 변경한다.

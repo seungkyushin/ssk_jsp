@@ -56,15 +56,48 @@ if(user!=null && user.getUserNo().toString().equals(request.getParameter("userno
 {
 %>
 		  
-		  <input type="text" id="checkPwd" name="checkPwd">
-		  <button>회원 수정</button><button onclick="deleteUser()">회원 탈퇴</button>
+		  <input type="text" id="checkPwd" name="checkPwd" class="form-control"><br>
+		  <input type ="button" value="회원 수정" id="btnUpdate" class="form-control">
+		  <input type ="button" value="회원 수정" id="btnUpdateChk" class="form-control">
+		  <input type ="button" onclick="deleteUser()"value="회원 탈퇴" class="form-control">
+		  
 <script>
+function afterCheckPwd(result)
+{
+	if(result.result =="ok")
+	{
+		$("#userPwd").removeAttr("disabled");
+		$("#userName").removeAttr("disabled");
+		$("#userAge").removeAttr("disabled");
+		$("#userAddress").removeAttr("disabled");
+	}else{
+		alert(result.msg);
+	}
+}
+$("#btnUpdate").click(function(){
+
+	var url = "checkPwd.user";
+	var param = {};
+	param["cmd"] = "checkPwd";
+	param["checkPwd"] = $("#checkPwd").val();
+	
+	$.ajax({
+		type : "post",
+		url : url,
+		dataType : "json",
+		data : param,
+		success : afterCheckPwd,
+		error : function(xhr,status){
+			alert("에러 : " + xhr.responseText)
+		}
+	});
+})
 function afterDelete(result){
 	alert(result.msg);
 	
 	if(result.result=="ok")
 		{
-		location.href="/user/login.jsp";
+		 location.href=result.url;
 		}
 }
 function deleteUser(){
