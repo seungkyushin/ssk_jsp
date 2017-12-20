@@ -22,4 +22,16 @@
     	<servlet-name>UserServlet</servlet-name>
     	<url-pattern>*.user</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+    	<servlet-name>DepartServlet</servlet-name>
+    	<servlet-class>com.test.jsp.servlet.DepartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>DepartServlet</servlet-name>
+    	<url-pattern>/sdepart/*</url-pattern>
+    </servlet-mapping>
+    
+    
 </web-app>

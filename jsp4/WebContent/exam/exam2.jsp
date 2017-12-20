@@ -20,10 +20,33 @@ session : ${s_test}
 <br>
 application : ${a_test}
 
+<%
+String[] strs = {"1","2","3"};
+UserInfo[] userList = new UserInfo[3];
+UserInfo ui = new UserInfo();
+ui.setUserName("test1");
+userList[0] = ui;
+ui = new UserInfo();
+ui.setUserName("test2");
+userList[1] = ui;
+ui = new UserInfo();
+ui.setUserName("test3");
+userList[2] = ui;
+request.setAttribute("userList",userList);
+%>
 
-<c:forEach var="test" begin="5" end="100" step="5">
 
-${num}, 
-</c:forEach>
+
+<table border="1">
+	<tr>
+		<th>유저이름</th>
+	</tr>
+	<c:forEach var="ui" items="${userList}">
+		<tr>
+			<td>${ui.userName}</td>
+		</tr>
+	</c:forEach>
+			
+</table>
 </body>
 </html>
