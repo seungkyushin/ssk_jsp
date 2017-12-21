@@ -42,25 +42,22 @@ public class DepartServlet extends HttpServlet{
 	public void doProcess(HttpServletRequest req,
 			HttpServletResponse res)throws
 	IOException, ServletException{
-		req.setCharacterEncoding("utf-8");
-
-
 		String uri = req.getRequestURI();
 		System.out.println(uri);
 		String cmd = getCommandFormUri(uri);
 		System.out.println(cmd);
-		
-		uri = uri.replace("/s", "/");
+
 		if( cmd.equals("list") )
 		{
-			ds.selectDepartList(req);
+			req.setAttribute("departList", ds.selectDepartList());
 			
 		}else if( cmd.equals("view"))
 		{
-			
+			String diNo = req.getParameter("diNo");
+			req.setAttribute("depart", ds.selectDepart(Integer.parseInt(diNo)));
 		}else if( cmd.equals("update"))
 		{
-			
+			req.setAttribute("depart", ds.selectDepart());
 		}else if( cmd.equals("insert"))
 		{
 			
@@ -69,7 +66,7 @@ public class DepartServlet extends HttpServlet{
 		}
 		
 		//< 배달원
-		RequestDispatcher rd = req.getRequestDispatcher(uri+".jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/view/" + uri + ".jsp");
 
 		rd.forward(req, res);
 	}

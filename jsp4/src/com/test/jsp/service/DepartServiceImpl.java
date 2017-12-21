@@ -1,33 +1,45 @@
 package com.test.jsp.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.test.jsp.common.DBCon;
+import com.test.jsp.dto.DepartDAO;
+import com.test.jsp.dto.DepartDAOImpl;
+import com.test.jsp.dto.DepartInfo;
 
 public class DepartServiceImpl implements DepartService{
 
 	@Override
-	public void selectDepartList(HttpServletRequest req) {
-		ArrayList<HashMap<String,Object>> departList = null;
-		
-		departList = new ArrayList<HashMap<String,Object>>();
-		for(int i=1; i<=10; i++)
+	public ArrayList<DepartInfo> selectDepartList() {
+		ArrayList<DepartInfo> departList = null;
+		DBCon dbCon = new DBCon();
+		try {
+			DepartDAO ddao = new DepartDAOImpl(dbCon.getConnection());
+			departList = ddao.selectDepartList();
+		}catch(ClassNotFoundException | SQLException e)
 		{
-			HashMap<String,Object> hm = new HashMap<String,Object>();
-			hm.put("dino", i);
-			hm.put("diname", i+"번째 부서");
-			hm.put("didesc", i+"번째 부서 설명");
-			departList.add(hm);
-			
+			e.printStackTrace();
 		}
-		req.setAttribute("departList", departList);
 		
+		return departList;
 	}
 
 	@Override
-	public void selectDepart(HttpServletRequest req) {
+	public DepartInfo selectDepart(int diNo) {
+		DepartInfo di = null;
+		DBCon dbCon = new DBCon();
+		try {
+			DepartDAO ddao = new DepartDAOImpl(dbCon.getConnection());
+			di = ddao.selectDepart(diNo);
+		}catch(ClassNotFoundException | SQLException e)
+		{
+			e.printStackTrace();
+		}
 		
+		return di;
 		
 	}
 
@@ -40,6 +52,12 @@ public class DepartServiceImpl implements DepartService{
 	public void insertDepart(HttpServletRequest req) {
 	
 		
+	}
+
+	@Override
+	public DepartInfo selectDepart() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

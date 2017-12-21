@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>list</title>
 </head>
+
 <body>
 <div class="container">
 		<table id="table" data-height="460"
@@ -21,16 +22,22 @@
 			<tbody id="result_tbody">
 		
 			<c:forEach items="${departList}" var="dp">
-			<tr>
-				<c:if test="${dp.dino%2==1}">
-					<td>${dp.dino}</td>
-					<td>${dp.diname}</td>
-					<td>${dp.didesc}</td>
-				</c:if>
+			<tr onclick="goView(${dp.diNo})">
+			
+					<td>${dp.diNo}</td>
+					<td>${dp.diName}</td>
+					<td>${dp.ditest}</td>
+				
 			</tr>
 			</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	<script>
+	function goView(diNo)
+	{
+		location.href="/depart/view?diNo=" + diNo;
+	}
+	</script>
 </body>
 </html>

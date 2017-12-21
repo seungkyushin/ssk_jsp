@@ -40,6 +40,14 @@ public class UserServlet extends HttpServlet{
 	public void doProcess(HttpServletRequest req,
 			HttpServletResponse res)throws
 	IOException, ServletException{
+		System.out.println("UserServlet");
+		req.setCharacterEncoding("utf-8");
+		res.setCharacterEncoding("utf-8");
+		res.setContentType("text/html;charset=utf-8");
+		
+		String mytest = req.getParameter("mytest");
+		System.out.println(mytest);
+		
 		req.setCharacterEncoding("utf-8");
 		res.setCharacterEncoding("utf-8");
 		res.setContentType("text/html;charset=utf-8");

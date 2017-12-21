@@ -28,7 +28,7 @@ $(document).ready(function(){
 	var url = "list.user";
 	var param = {};
 	param["cmd"] = "list";
-
+	param["mytest"] = "한글한글";
 
 	$.ajax({
 		type : "post",
