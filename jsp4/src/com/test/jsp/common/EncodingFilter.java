@@ -24,8 +24,6 @@ public class EncodingFilter implements Filter{
 		res.setCharacterEncoding("utf-8");
 		res.setContentType("text/html;charset=utf-8");
 		
-		System.out.println("doFilter");
-		
 		//< doGet이나 doPost으로 이동하게된다.
 		fc.doFilter(req, res);
 		

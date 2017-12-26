@@ -9,11 +9,11 @@ import com.test.jsp.dto.DepartInfo;
 
 public interface DepartService {
 	//public void selectDepartList(HttpServletRequest req);
-	public ArrayList<DepartInfo> selectDepartList();
+	public ArrayList<DepartInfo> selectDepartList(String search, String searchStr);
 	public DepartInfo selectDepart(int diNo);
 	public DepartInfo selectDepart();
 	public void updateDepart(HttpServletRequest req);
-	public void insertDepart(HttpServletRequest req);
-	
+	public int	 insertDepart(DepartInfo di);
+	public int	 deleteDepart(DepartInfo di);
 
 }

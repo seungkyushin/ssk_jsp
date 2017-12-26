@@ -56,7 +56,8 @@ $(document).ready(function(){
             <li class="active"><a href="<%=rootPath%>/">Home</a></li>
             <li><a href="<%=rootPath%><%=url%>"><%=menu %></a></li>
             <li><a href="<%=rootPath%>/user/join.jsp">join us</a></li>
-            <li><a href="<%=rootPath%>/user/list.jsp">유저 리스트</a></li>
+            <li><a href="<%=rootPath%>/user/list.jsp">User List</a></li>
+            <li><a href="<%=rootPath%>/depart/list">Depart List</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

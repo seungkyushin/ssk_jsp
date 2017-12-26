@@ -13,12 +13,12 @@ import com.test.jsp.dto.DepartInfo;
 public class DepartServiceImpl implements DepartService{
 
 	@Override
-	public ArrayList<DepartInfo> selectDepartList() {
+	public ArrayList<DepartInfo> selectDepartList(String search, String searchStr) {
 		ArrayList<DepartInfo> departList = null;
 		DBCon dbCon = new DBCon();
 		try {
 			DepartDAO ddao = new DepartDAOImpl(dbCon.getConnection());
-			departList = ddao.selectDepartList();
+			departList = ddao.selectDepartList(search,searchStr);
 		}catch(ClassNotFoundException | SQLException e)
 		{
 			e.printStackTrace();
@@ -49,15 +49,49 @@ public class DepartServiceImpl implements DepartService{
 	}
 
 	@Override
-	public void insertDepart(HttpServletRequest req) {
-	
+	public  int insertDepart(DepartInfo di) {
+		DBCon dbCon = new DBCon();
+		try {
+				DepartDAO ddao = new DepartDAOImpl(dbCon.getConnection());
+				return ddao.insertDepart(di);
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				dbCon.closeCon();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
+		return 0;
 	}
 
 	@Override
 	public DepartInfo selectDepart() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int deleteDepart(DepartInfo di) {
+		DBCon dbCon = new DBCon();
+		try {
+				DepartDAO ddao = new DepartDAOImpl(dbCon.getConnection());
+				return ddao.deleteDepart(di);
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				dbCon.closeCon();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return 0;
 	}
 	
 

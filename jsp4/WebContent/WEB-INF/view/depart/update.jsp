@@ -14,15 +14,15 @@
 			<tbody id="result_tbody">
 			<tr>
 					<td>부서번호</td>
-					<td>${depart.dino}</td>
+					<td>${depart.diNo}</td>
 			</tr>
 			<tr>
 					<td>부서이름</td>
-					<td><input type="text" name="diname" id="diname" value="${depart.diname}"></td>
+					<td><input type="text" name="diName" id="diName" value="${depart.diName}"></td>
 			</tr>
 			<tr>
 					<td>부서설명</td>
-					<td><input type="text" name="didesc" id="didesc" value="${depart.didesc}"></td>
+					<td><input type="text" name="diEtc" id="diEtc" value="${depart.diEtc}"></td>
 			</tr>
 
 			</tbody>

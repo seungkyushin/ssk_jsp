@@ -1,48 +1,32 @@
 package com.test.jsp.dto;
 
 public class DepartInfo {
-	private int DiNo;
-	private String DiName;
-	private String DiEtc;
-	private String Ditest="1";
-	
-
-
-	public String getDItest() {
-		return Ditest;
-	}
-
-	public void setDItest(String ditest) {
-		Ditest = ditest;
-	}
-
+	private int diNo;
+	private String diName;
+	private String diEtc;
 	public int getDiNo() {
-		return DiNo;
+		return diNo;
 	}
-
 	public void setDiNo(int diNo) {
-		DiNo = diNo;
+		this.diNo = diNo;
 	}
-
 	public String getDiName() {
-		return DiName;
+		return diName;
 	}
-
 	public void setDiName(String diName) {
-		DiName = diName;
+		this.diName = diName;
 	}
-
 	public String getDiEtc() {
-		return DiEtc;
+		return diEtc;
 	}
-
 	public void setDiEtc(String diEtc) {
-		DiEtc = diEtc;
+		this.diEtc = diEtc;
 	}
-
 	@Override
 	public String toString() {
-		return "DepartInfo [DiNo=" + DiNo + ", DiName=" + DiName + ", DiEtc=" + DiEtc + "]";
+		return "DepartInfo [diNo=" + diNo + ", diName=" + diName + ", diEtc=" + diEtc + "]";
 	}
+
+
 
 }
