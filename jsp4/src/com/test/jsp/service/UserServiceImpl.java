@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 		DBCon dbCon = new DBCon();
 		try {
 			Connection con = dbCon.getConnection();
-			String sql = "INSERT INTO user_info(username, userid, userpwd, userage,useraddress)";
+			String sql = "INSERT INTO user_info(username, userid, userpwd, userage,useraddress,dino)";
 			sql += "values(?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, ui.getUserName());
@@ -152,6 +152,7 @@ public class UserServiceImpl implements UserService {
 				ui.setUserPwd(rs.getString("userpwd"));
 				ui.setUserAge(rs.getInt("userage"));
 				ui.setUserAddress(rs.getString("useraddress"));
+				ui.setDiNo(rs.getInt("dino"));
 				al.add(ui);
 			}
 		} catch (Exception e) {

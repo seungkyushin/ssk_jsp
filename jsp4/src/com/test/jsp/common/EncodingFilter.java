@@ -20,9 +20,9 @@ public class EncodingFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain fc)
 			throws IOException, ServletException {
-		req.setCharacterEncoding("utf-8");
-		res.setCharacterEncoding("utf-8");
-		res.setContentType("text/html;charset=utf-8");
+//		req.setCharacterEncoding("utf-8");
+//		res.setCharacterEncoding("utf-8");
+//		res.setContentType("text/html;charset=utf-8");
 		
 		//< doGet이나 doPost으로 이동하게된다.
 		fc.doFilter(req, res);

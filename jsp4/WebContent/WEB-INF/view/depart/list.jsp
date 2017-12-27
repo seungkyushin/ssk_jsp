@@ -52,6 +52,14 @@
 	</script>
 	</c:if>
 	
+		<c:if test="${update == 1}">
+	
+	<script>
+		alert("업데이트 되었습니다.");
+		location.href="/depart/list";
+	</script>
+	</c:if>
+	
 	<c:if test="${delete == 1}">
 	
 	<script>

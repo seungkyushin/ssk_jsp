@@ -57,6 +57,7 @@ $(document).ready(function(){
 					<th class="text-center" data-field="userName">Name</th>
 					<th class="text-center" data-field="userAge">Age</th>
 					<th class="text-center" data-field="userAddress">Address</th>
+					<th class="text-center" data-field="diNo">Depart</th>
 				</tr>
 			</thead>
 			<tbody id="result_tbody">
