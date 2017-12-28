@@ -39,10 +39,7 @@ public class UserServlet extends HttpServlet{
 	public void doProcess(HttpServletRequest req,
 			HttpServletResponse res)throws
 	IOException, ServletException{
-		System.out.println("UserServlet");
-		
-		String mytest = req.getParameter("mytest");
-		System.out.println(mytest);
+	
 		String str = req.getCharacterEncoding();
 		System.out.println("chatset : " + str);
 		 
